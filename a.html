@@ -1,0 +1,25 @@
+<html>
+	<head>
+		<title>upload file</title>
+		<script src="protoaculous.js" type="text/javascript"></script>
+		<script src="app.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<div id="loading" style="display:none">Uploading...</div>
+		<div id="img"></div>
+		<form enctype="multipart/form-data" method="post" id="f" target="photo_iframe" action="post.php" />
+			<input type="file" name="photo" id="photo" />
+		</form>
+		<iframe name="photo_iframe"></iframe>
+		<script>
+			document.observe('dom:loaded', function(){
+				Upload.init({
+					form: 'f', 
+					photo: 'photo', 
+					loading: 'loading', 
+					image: 'img'
+				}); 
+			});
+		</script>
+	</body>
+</html>
