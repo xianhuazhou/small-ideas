@@ -1,0 +1,7 @@
+user = postfix
+password = postfix
+hosts = 127.0.0.1 
+dbname = postfix
+table = alias
+select_field = goto
+where_field = address

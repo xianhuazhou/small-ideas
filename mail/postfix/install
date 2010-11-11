@@ -1,0 +1,5 @@
+# without ssl
+make makefiles AUXLIBS="-L/usr/lib -lsasl2 -L/usr/local/mysql/lib -lmysqlclient -lz -lm" CCARGS="-DUSE_SASL_AUTH -DUSE_CYRUS_SASL -I/usr/local/include/sasl -DHAS_MYSQL -I/usr/local/mysql/include"
+
+# with ssl
+make makefiles AUXLIBS="-lssl -lcrypto -L/usr/lib -lsasl2 -L/usr/local/mysql/lib -lmysqlclient -lz -lm" CCARGS="-DUSE_TLS -DUSE_SASL_AUTH -DUSE_CYRUS_SASL -I/usr/local/include/sasl -DHAS_MYSQL -I/usr/local/mysql/include"

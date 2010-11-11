@@ -1,0 +1,7 @@
+user = postfix
+password = postfix
+hosts = 127.0.0.1 
+dbname = postfix
+table = mailbox
+select_field = maildir
+where_field = username

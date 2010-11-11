@@ -1,0 +1,5 @@
+== mail server in Ubuntu 
+postfix, postfixadmin, dovecot
+
+== required
+php, mysql, openssl & related dev libs

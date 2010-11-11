@@ -1,0 +1,10 @@
+# without ssl
+./configure --with-mysql=/usr/local/mysql --enable-login --enable-plain --enable-sql
+
+# with ssl
+./configure --with-mysql=/usr/local/mysql --enable-login --enable-plain --enable-sql --with-openssl=/usr
+
+# create a link
+$ mv /usr/lib/sasl2 /usr/lib/sasl2.old
+$ ln -s /usr/local/lib/sasl2 /usr/lib
+$ ln -s /usr/local/lib/sasl2 /etc/
