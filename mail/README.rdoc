@@ -3,3 +3,7 @@ postfix, postfixadmin, dovecot
 
 == required
 php, mysql, openssl & related dev libs
+
+== SSL support
+Postfix: http://www.postfix.org/TLS_README.html
+Dovecot: http://wiki2.dovecot.org/SSL/CertificateCreation
