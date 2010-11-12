@@ -1,0 +1,8 @@
+DELIMITER |
+CREATE TRIGGER removed_posts BEFORE DELETE 
+ON posts
+FOR EACH ROW BEGIN
+  INSERT INTO removed_posts (pid) VALUES(OLD.pid);
+END
+|
+DELIMITER ;
