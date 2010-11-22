@@ -1,0 +1,27 @@
+1. Download a livecd such as Fedora-14-x86_64-Live-LXDE.iso, copy the iso file to "/" (such as "/dev/sda1" which can boot the system)
+
+2. $ mkdir /mnt/iso
+   $ mount -o loop /Fedora-14-x86_64-Live-LXDE.iso /mnt/iso
+   $ sudo cp -r -p /mnt/iso/* /
+
+3. Add a new grub(1.98) menu entry like below:
+
+menuentry 'Install fedora' --class fedora --class gnu-linux --class gnu --class os {
+   insmod part_msdos
+   insmod ext2
+   set root='(hd0,msdos1)'
+   search --no-floppy --fs-uuid --set fd85b189-e7e4-4ec6-9d8f-382140f4947b
+   linux /isolinux/vmlinuz0 root=live:/dev/sda1 liveimg quiet rhgb rootfstype=auto vga=791
+   initrd /isolinux/initrd0.img
+}
+
+4. Reboot the system, we know what to do then.
+
+...
+
+Cleanup:
+
+ * $ sudo rm -rf /isolinux /LiveOS /EFI /GPL
+ * Remove the entry "Install Fedora" from the grub menu
+ * Re-install grub(1.98) on Ubuntu after Fedora is installed, because Fedora's grub is too old.
+   Need to add the Ubuntu's menu entry on the Fedora's grub.conf file manually.
