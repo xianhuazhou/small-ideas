@@ -1,0 +1,3 @@
+# It seems there is no /dev/dsp
+fix it: [sudo] modprobe snd-pcm-oss
+It can be added into the file: /etc/rc.local 
