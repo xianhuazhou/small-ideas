@@ -1,0 +1,12 @@
+$ [sudo] yum -y install @gnome-desktop
+$ [sudo] cat /etc/sysconfig/desktop
+
+  PREFERRED=/usr/bin/startx
+  DISPLAYMANAGER=/usr/sbin/gdm
+
+$ [sudo] reboot
+
+It's also can change back to lxde by update the /etc/sysconfig/desktop file:
+
+  PREFERRED=/usr/bin/startlxde
+  DISPLAYMANAGER=/usr/sbin/lxdm
