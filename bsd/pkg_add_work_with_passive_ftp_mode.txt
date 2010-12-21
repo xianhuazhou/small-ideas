@@ -1,0 +1,2 @@
+$ sudo FTP_PASSIVE_MODE=1 pkg_add -rv wget
+# http://forums.freebsd.org/showthread.php?t=19257
