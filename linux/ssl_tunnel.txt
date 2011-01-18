@@ -1,0 +1,2 @@
+#-L local-port:host:remote-port
+ssh -L 3002:localhost:3000 user@host 
