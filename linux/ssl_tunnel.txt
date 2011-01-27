@@ -1,2 +1,10 @@
 #-L local-port:host:remote-port
 ssh -L 3002:localhost:3000 user@host 
+
+# create a local socks server
+# using 3030 as local socks server's port
+# remote sshd is running on the 443 port
+# more: http://www.linux.com/news/enterprise/networking/1616-use-ssh-to-create-an-http-proxy
+#       http://kovyrin.net/2008/12/11/using-ssh-tunnel-connection-as-a-socks5-proxy/
+#       http://daniel.haxx.se/docs/sshproxy.html
+ssh -D 3030 -f -q -C -N -p 443 user@remote-ssh.server 
