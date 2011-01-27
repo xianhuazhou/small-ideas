@@ -1,0 +1,9 @@
+#!/bin/sh
+# replace the last output line with 'echo "/etc/X11/Sessions/Gnome"' in the file "/etc/X11/chooser.sh" if the output is wrong.
+unset SESSION_MANAGER
+
+# slove "VNC: Could not acquire name on session bus" problem
+unset DBUS_SESSION_BUS_ADDRESS
+
+# chmod +x /etc/X11/xinit/xinitrc first
+exec /etc/X11/xinit/xinitrc
