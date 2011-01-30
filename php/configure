@@ -1,0 +1,24 @@
+--prefix=/usr/local/php \
+--enable-fpm \ 
+--enable-zend-multibyte \
+--enable-zip \ 
+--with-xsl \ 
+--enable-sqlite-utf8 \ 
+--enable-sockets \
+--enable-soap \
+--with-openssl-dir \
+--with-readline \
+--with-pdo-mysql=mysqlnd \
+--with-mysql=mysqlnd \
+--enable-pcntl \
+--enable-mbstring \
+--enable-gd-native-ttf \
+--with-freetype-dir \
+--with-png-dir \
+--with-jpeg-dir \
+--with-gd \
+--enable-exif \
+--with-curl \
+--enable-calendar \
+--with-bz2 \
+--enable-bcmath
