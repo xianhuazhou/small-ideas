@@ -1,0 +1,6 @@
+# wget http://www2.ati.com/drivers/linux/ati-driver-installer-11-1-x86.x86_64.run
+# sh ati-driver-installer-11-1-x86.x86_64.run
+# aticonfig --initial -f
+# reboot
+
+PS: need to remove & clean old fglrx related drivers/files
