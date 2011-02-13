@@ -1,0 +1,10 @@
+# wget http://www.kernel.org/pub/linux/kernel/v2.6/linux-2.6.37.tar.bz2
+# tar xjvf linux-2.6.37.tar.bz2
+# cd linux-2.6.37
+# make menuconfig
+# make 
+# make modules_install
+# make install
+# cd /boot
+# mkinitramfs -o initrd.img-2.6.37 2.6.37
+# grub-mkconfig
