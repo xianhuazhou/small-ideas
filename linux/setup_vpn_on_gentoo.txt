@@ -1,0 +1,23 @@
+# emerge -av ppp
+# emerge -av pptpclient
+
+# cat /etc/ppp/chap-secrets
+  # Secrets for authentication using CHAP
+  # client    server  secret          IP addresses
+  username vpnname userpass *
+  # ------------
+
+# cat /etc/ppp/options.pptp | grep -v '#'
+  lock
+  noauth
+  refuse-eap
+
+# cat /etc/ppp/peers/vpn
+  pty "pptp your.vpn.server --nolaunchpppd"
+  name "username"
+  remotename "vpnname"
+  require-mppe-128
+  file /etc/ppp/options.pptp
+  ipparam vpn
+
+More: http://pptpclient.sourceforge.net/howto-gentoo.phtml
