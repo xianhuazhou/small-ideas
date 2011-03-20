@@ -1,0 +1,3 @@
+#!/bin/sh
+# load necessrary modules for virtualbox
+for m in vbox{drv,netadp,netflt}; do modprobe $m; done

@@ -1,0 +1,7 @@
+from: http://www.zparacha.com/include-externaljar-file-in-maven/
+mvn install:install-file \
+-Dfile=utils.jar \
+-DgroupId=com.zparacha.example \
+-DartifactId=utils \
+-Dversion=1.0 \
+-Dpackaging=jar
