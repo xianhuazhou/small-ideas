@@ -20,3 +20,4 @@ if &t_Co > 2 || has("gui_running")
 endif
 autocmd FileType text setlocal textwidth=80
 set autoindent
+autocmd BufNewFile,BufRead *.twig set filetype=jinja
