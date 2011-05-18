@@ -1,0 +1,7 @@
+$ sudo dmesg | grep bsd
+[    1.011384]  sda1: <bsd: sda9 sda10 sda11 sda12 sda13 >
+
+$ sudo for d in sda{9,10,11,12,13}; do 
+     [ ! -d /mnt/$d ] && mkdir /mnt/$d;
+     mount -r -t ufs -o ufstype=ufs2 /dev/$d /mnt/$d; 
+  done

@@ -1,0 +1,22 @@
+
+volume management
+    type mgmt/glusterd
+    option working-directory /usr/local/glusterfs/etc/glusterd
+    option transport-type tcp
+    option transport.socket.keepalive-time 10
+    option transport.socket.keepalive-interval 2
+end-volume
+
+volume brick
+  type storage/posix                   # POSIX FS translator
+  option directory /mnt/share          # Export this directory
+end-volume
+
+volume server
+  type protocol/server
+  option transport-type tcp
+  option transport.socket.listen-port 24016              
+
+  subvolumes brick
+  option auth.addr.brick.allow * # Allow access to "brick" volume
+end-volume

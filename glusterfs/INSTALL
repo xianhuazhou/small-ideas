@@ -1,0 +1,66 @@
+---  DO IT ON 2 MACHINES: debian && ubuntu ---
+
+# apt-get install gcc g++ bison flex nmap libreadline6-dev 
+# wget http://download.gluster.com/pub/gluster/glusterfs/LATEST/glusterfs-3.2.0.tar.gz
+# tar xzvf glusterfs-3.2.0.tar.gz
+# cd glusterfs-3.2.0
+# ./configure --prefix=/usr/local/glusterfs
+# make
+# make install
+# mkdir /mnt/share
+
+Then add the path "/usr/local/glusterfs/sbin" to the $PATH variable by update /etc/profile
+
+start glusterd:
+debian:  glusterd -f debian.glusterfsd.vol
+ubuntu:  glusterd -f ubuntu.glusterfsd.vol
+
+------------------
+
+On machine "debian":
+
+# gluster peer probe ubuntu
+Probe successful
+
+# gluster peer status
+Number of Peers: 1
+
+Hostname: ubuntu
+Uuid: ea6b7e8b-138e-4b02-a087-1e65f0e7b42b
+State: Peer in Cluster (Connected)
+
+# gluster volume create my-data transport tcp ubuntu:/mnt/share
+Creation of volume my-data has been successful. Please start the volume to access data.
+
+# gluster volume info
+Volume Name: my-data
+Type: Distribute
+Status: Created
+Number of Bricks: 1
+Transport-type: tcp
+Bricks:
+Brick1: ubuntu:/mnt/share
+
+# gluster volume add-brick my-data debian:/mnt/share
+Add Brick successful
+
+# gluster volume info
+Volume Name: my-data
+Type: Distribute
+Status: Started
+Number of Bricks: 2
+Transport-type: tcp
+Bricks:
+Brick1: ubuntu:/mnt/share
+Brick2: debian:/mnt/share
+
+# gluster volume start my-data
+Starting volume my-data has been successful
+
+-- on a client side (e.g. ubuntu):
+# mount -t glusterfs debian:/my-data /mnt/tmp
+# df -h -T
+...
+debian:/my-data
+    fuse.glusterfs     27G  7.9G   18G  32% /mnt/tmp
+...

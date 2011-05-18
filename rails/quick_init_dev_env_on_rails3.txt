@@ -1,0 +1,99 @@
+# rspec, autotest, spork ... on ubuntu
+
+$ rails new site -T
+$ cd site
+
+# Gemfile: 
+--------------
+source 'http://rubygems.org'
+
+gem 'rails', '3.0.5'
+
+gem 'sqlite3'
+
+gem 'unicorn'
+
+group :development, :test do
+   gem 'webrat'
+   gem 'rspec'
+   gem 'rspec-rails'
+   gem 'spork'
+   gem 'annotate-models'
+end
+--------------
+
+$ bundle install
+
+$ [sudo] gem install autotest
+$ [sudo] gem install autotest-rails-pure
+$ [sudo] gem install autotest-growl
+
+$ [sudo] apt-get install libnotify-bin
+
+$ spork --bootstrap
+
+# spec/spec_helper.rb
+--------------
+require 'rubygems'
+require 'spork'
+
+Spork.prefork do
+  ENV["RAILS_ENV"] ||= 'test'
+  require File.expand_path("../../config/environment", __FILE__)
+  require 'rspec/rails'
+  Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
+  RSpec.configure do |config|
+    config.mock_with :rspec
+
+    config.use_transactional_fixtures = true
+    ActiveSupport::Dependencies.clear
+  end
+end
+
+Spork.each_run do
+end
+--------------
+
+# config/application.rb
+--------------
+class Application < Rails::Application
+
+  # ...
+  if Rails.env.test?
+    initializer :after => :initialize_dependency_mechanism do
+      ActiveSupport::Dependencies.mechanism = :load
+    end
+  end
+
+  # ...
+end
+--------------
+
+# .autotest
+--------------
+require 'autotest/growl'
+--------------
+
+# .rspec
+--------------
+--colour
+--drb
+--------------
+
+# .gitignore
+--------------
+.bundle
+db/*.sqlite3*
+log/*.log
+*.log
+tmp/**/*
+tmp/*
+doc/api
+doc/app
+*.swp
+* ̃
+.DS_Store
+--------------
+
+$ spork
+$ autotest
