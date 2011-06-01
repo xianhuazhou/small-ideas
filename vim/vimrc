@@ -22,3 +22,6 @@ autocmd FileType text setlocal textwidth=80
 set autoindent
 au BufNewFile,BufRead *.twig set filetype=jinja
 au BufRead,BufNewFile *.js set syntax=jquery
+
+map <f2> :w<CR>:!php -f %<CR>
+map <f3> :w<CR>:!ruby %<CR>
