@@ -6,10 +6,10 @@ set sm
 set columns=80
 set background=dark
 set et
-set softtabstop=2
-set tabstop=2
+set softtabstop=4
+set tabstop=4
 set smarttab
-set shiftwidth=2
+set shiftwidth=4
 set nobk
 set nu
 set backspace=indent,eol,start
