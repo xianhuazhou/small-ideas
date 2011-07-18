@@ -1,0 +1,18 @@
+$ sudo apt-get install samba smbfs smbclient
+$ mkdir /opt/share
+$ chmod 777 /opt/share
+$ sudo cp /etc/samba/smb.conf /etc/samba/smb.conf.bak
+$ sudo vi /etc/samba/smb.conf
+;---------------------
+[global]
+workgroup = MYGROUP
+security = share
+guest ok = yes
+client lanman auth = yes
+[share]
+path = /opt/share
+browseable = yes
+writeable = yes
+;---------------------
+
+$ sudo service smbd restart
