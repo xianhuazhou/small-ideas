@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Arcs</title>
+        <script>
+            function draw() {
+                var width = 400, 
+                    height = 400,
+                    centerX = width / 2,
+                    centerY = height / 2,
+                    ctx = document.getElementById("img").getContext('2d'),
+                    length = 1000;
+
+                var startingAngle = 1.0 * Math.PI;
+                ctx.strokeStyle = 'blue';
+
+                for (var i = 1; i <= length; i++) {
+                    var color = i;
+                    var endingAngle = 0.1 + startingAngle;
+                    ctx.arc(centerX, centerY, i * 0.2, startingAngle, endingAngle, false);
+                    startingAngle = endingAngle;
+                }
+                ctx.stroke();
+            }
+
+            window.onload = function() {
+                draw();
+            }
+        </script>
+    </head>
+    <body>
+        <canvas id="img" width="400" height="400"></canvas>
+    </body>
+</html>
