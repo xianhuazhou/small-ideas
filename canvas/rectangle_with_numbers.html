@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Animation: rectange with numbers</title>
+        <script>
+            var width = 200,
+               height = 200,
+               startWidth = 1,
+               startHeight = 1,
+               timeout = 5,
+               stepX = 1, 
+               stepY = 1,
+               halfWidth = width / 2,
+               halfHeight = height / 2,
+               factor = 1,
+               number = 1,
+               colors = ['red', 'black', 'yellow', 'green', 'blue', 'gray', 'orange'];
+
+            function getRandomColor() {
+                color = colors[Math.round(Math.random() * (colors.length - 1))];
+                return color;
+            }
+
+            function draw(x, y, w, h) {
+                var ctx = document.getElementById('img').getContext('2d');
+
+                ctx.strokeRect(x, y, w, h);
+
+                if (x <= 0 || y <= 0) {
+                    factor = -1;
+                    ctx.strokeStyle = getRandomColor();
+                }
+                if (x >= halfWidth || y >= halfHeight) {
+                    factor = 1;
+                    ctx.strokeStyle = getRandomColor();
+                    number++;
+                }
+
+                // draw number
+                var textLength = ("" + number).length;
+                fontSize = h / 2;
+                ctx.textBaseline = "top";
+                ctx.font = "bold " + (h / 3) + "px Calibri";
+                ctx.fillText(number, x + w/2 - (fontSize / 4.5) * textLength, y + h/2 - fontSize / 3);
+
+                setTimeout(function(){ 
+                    ctx.clearRect(x, y, w, h);
+                    draw(x - stepX * factor, y - stepY * factor, w + stepX * 2 * factor, h + stepY * 2 * factor);
+                }, timeout);
+            }
+
+            window.onload = function() {
+                draw(halfWidth - startWidth, halfHeight - startHeight, startWidth, startHeight);
+            }
+        </script>
+    </head>
+    <body>
+        <canvas id="img" width="200" height="200"></canvas>
+    </body>
+</html>
