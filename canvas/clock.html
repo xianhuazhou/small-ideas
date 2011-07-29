@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>clock</title>
+        <script>
+            var radius = 100,
+                centerX = 105,
+                centerY = 105,
+                factor = -1,
+                ctx = null;
+
+            function draw() {
+                var x, y, 
+                now = new Date(), fixAngle = 270, p = {},
+                oneHourAngle = 30, oneMinuteAngle = 6;
+
+                var hours = now.getHours(),
+                    minutes = now.getMinutes(),
+                    seconds = now.getSeconds(),
+                    month = now.getMonth(),
+                    date = now.getDate();
+
+                ctx = document.getElementById('img').getContext('2d');
+
+                drawBigCircle(); 
+                drawLabels(oneHourAngle, fixAngle);
+
+                drawDate(now.getFullYear(), month, date, hours, minutes, seconds); 
+                drawCenterCircle(); 
+
+                hours %= 12;
+                drawLine('black', hours * oneHourAngle + fixAngle + minutes * 0.4, radius - 40);
+                drawLine('red', minutes * oneMinuteAngle + fixAngle, radius - 30);
+                drawLine('green', seconds * oneMinuteAngle + fixAngle, radius - 25);
+
+                setTimeout(function(){
+                    ctx.clearRect(0, 0, 400, 400);
+                    draw();
+                }, 995);
+            }
+
+            function getPoint(angle, realRadius) {
+                return {
+                    x: centerX + realRadius * Math.cos(angle * Math.PI / 180),
+                    y: centerY + realRadius * Math.sin(angle * Math.PI / 180)
+                }
+            }
+
+            function drawCircle(x, y) {
+                ctx.beginPath();
+                ctx.lineWidth = 3;
+                ctx.arc(x, y, 2, Math.PI, 4 * Math.PI, false);
+                ctx.closePath();
+                ctx.stroke();
+            }
+
+            function drawLine(color, angle, realRadius) {
+                ctx.beginPath();
+                ctx.strokeStyle = color;
+                ctx.moveTo(centerX, centerY);
+                p = getPoint(angle, realRadius);
+                ctx.lineWidth = 3;
+                ctx.lineTo(p.x, p.y);
+                ctx.stroke();
+                ctx.closePath();
+                drawCircle(p.x, p.y); 
+            }
+
+            function drawDate(year, month, date, hours, minutes, seconds) {
+                ctx.font = "20px sans-serif";
+                ctx.strokeStyle = "#979698";
+                ctx.lineWidth = 1;
+                ctx.strokeText(
+                    year + "-" + 
+                    (month < 10 ? '0' + month : month) + "-" + 
+                    (date < 10 ? '0' + date : date),
+                    50, 60
+                );
+                ctx.strokeText(
+                    (hours < 10 ? '0' + hours : hours) + ":" + 
+                    (minutes < 10 ? '0' + minutes : minutes) + ":" + 
+                    (seconds< 10 ? '0' + seconds : seconds), 
+                    63, 160
+                )
+            }
+
+            function drawCenterCircle() {
+                ctx.beginPath();
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = 'gray';
+                ctx.arc(centerX, centerY, 4, Math.PI, 3 * Math.PI, false); 
+                ctx.arc(centerX, centerY, 1, Math.PI, 3 * Math.PI, false); 
+                ctx.stroke();
+                ctx.closePath(); 
+            }
+
+            function drawLabels(oneHourAngle, fixAngle) {
+                ctx.font = "12px sans-serif";
+                ctx.fillStyle = 'black';
+                for (var i = 1; i <= 12; i++) {
+                    var space = i != 6 ? (i > 6 && i < 11 ? 6 : 12) : 8;
+                    p = getPoint(i * oneHourAngle + fixAngle, radius - space);
+                    ctx.fillText(i, p.x, p.y);
+                }
+            }
+
+            function drawBigCircle() {
+                ctx.strokeStyle = 'black';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, radius, Math.PI, 3 * Math.PI, false); 
+                ctx.stroke();
+                ctx.closePath();
+            } 
+
+            window.onload = draw; 
+        </script>
+    </head>
+    <body>
+        <canvas id="img" width="210" height="210"></canvas>
+    </body>
+</html>
