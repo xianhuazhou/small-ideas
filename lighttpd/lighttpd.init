@@ -1,29 +1,19 @@
 #!/bin/sh
 
-USER=zhou
-GROUP=zhou
+USER=lighttpd
+GROUP=lighttpd
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
 LIGHTY_DAEMON=/usr/local/lighttpd/sbin/lighttpd
-LIGHTY_OPTS="-f /etc/lighttpd.conf" 
+LIGHTY_OPTS="-f /usr/local/lighttpd/etc/lighttpd.conf" 
 LIGHTY_NAME=lighttpd
 LIGHTY_PIDFILE=/var/run/$LIGHTY_NAME.pid
 SCRIPTNAME=/etc/init.d/$LIGHTY_NAME
 SSD="/sbin/start-stop-daemon" 
-PHP_FCGI_CHILDREN=10
-PHP_FCGI_MAX_REQUESTS=1000
 RETVAL=0
-
-FCGI_DAEMON="/usr/local/lighttpd/bin/spawn-fcgi" 
-FCGI_PROGRAM="/usr/local/php/bin/php-cgi" 
-FCGI_PORT="4050" 
-FCGI_SOCKET="/tmp/php-fastcgi.sock" 
-FCGI_PIDFILE="/var/run/spawn-fcgi.pid" 
 
 test -x $LIGHTY_DAEMON || exit 0
 
 set -e
-
-export PHP_FCGI_CHILDREN PHP_FCGI_MAX_REQUESTS FCGI_WEB_SERVER_ADDRS
 
 . /lib/lsb/init-functions
 
@@ -35,24 +25,11 @@ case "$1" in
         else
             log_end_msg 0
         fi
-        log_daemon_msg "Starting spawn-fcgi" 
-        if ! $FCGI_DAEMON -s $FCGI_SOCKET -f $FCGI_PROGRAM -u $USER -g $GROUP -C $PHP_FCGI_CHILDREN -P $FCGI_PIDFILE; then
-            log_end_msg 1
-        else
-            log_end_msg 0
-        fi
         RETVAL=$?
   ;;
   stop)
         log_daemon_msg "Stopping $LIGHTY_NAME" 
         if $SSD --quiet --stop --oknodo --retry=0/30/KILL/5 --exec $LIGHTY_DAEMON; then
-            rm -f $LIGHTY_PIDFILE $FCGI_PIDFILE $FCGI_SOCKET
-            log_end_msg 0
-        else
-            log_end_msg 1
-        fi
-        log_daemon_msg "Killing all spawn-fcgi processes" 
-        if killall --signal 2 php-cgi > /dev/null 2> /dev/null; then
             log_end_msg 0
         else
             log_end_msg 1
@@ -85,4 +62,3 @@ reload)
 esac
 
 exit $RETVAL
-
