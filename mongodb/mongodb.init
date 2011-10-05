@@ -1,0 +1,47 @@
+#!/bin/sh
+# mongodb      init file for starting up the MongoDB server
+#
+# description: Starts and stops the MongDB DAEMON that handles all database requests.
+  
+DAEMON="/usr/local/mongodb/bin/mongod"
+PIDFILE="/usr/local/mongodb/log/mongodb.pid"
+OPTIONS="--pidfilepath ${PIDFILE} -f /usr/local/mongodb/conf/mongodb.conf"
+NAME="MongoDB"
+DESC="MongoDB database"
+
+. /lib/lsb/init-functions
+ 
+start() {
+    echo -n "Starting $NAME: "
+    start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON -- $OPTIONS 
+    return $?
+}
+ 
+stop() {
+    echo -n "Stopping $NAME: "
+    start-stop-daemon --stop --quiet --pidfile $PIDFILE
+    sleep 0.1
+    rm $PIDFILE
+    return $?
+}
+ 
+restart() {
+    stop
+    start
+}
+ 
+case "$1" in
+    start)
+        $1
+        ;;
+    stop)
+        $1
+        ;;
+    restart)
+        $1
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 2
+esac
+exit $?
