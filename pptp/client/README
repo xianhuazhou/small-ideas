@@ -1,0 +1,8 @@
+# install the pptp client
+apt-get install pptp-linux
+
+# connect to the vpn
+pon myvpn nodetach
+
+# documentation
+https://help.ubuntu.com/community/VPNClient

@@ -1,0 +1,7 @@
+pty "pptp 0.0.1.1 --nolaunchpppd" # ipaddress 0.0.1.1 need to change
+name vpntest # vpn username here
+remotename myvpn
+require-mppe-128
+file /etc/ppp/options.pptp
+ipparam vpn
+noauth

@@ -1,0 +1,8 @@
+# install pptpd
+apt-get install pptpd
+
+# start vpn
+/etc/init.d/pptpd start
+
+# documentation
+https://help.ubuntu.com/community/VPNServer
