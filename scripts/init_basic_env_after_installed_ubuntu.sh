@@ -41,3 +41,5 @@ cifs-utils \
 smbclient \
 samba-common \
 nfs-common \
+expect \
+realpath \
