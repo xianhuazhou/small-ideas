@@ -18,7 +18,7 @@ libmcrypt-dev \
 libreadline6-dev \
 libc-client2007e-dev \
 libdb-dev \
-libdb4.8++-dev \
+libdb++-dev \
 libcurl4-openssl-dev \
 libxslt1-dev \
 libt1-dev \
@@ -33,7 +33,6 @@ curl \
 bzip2 \
 unrar \
 nmap \
-snort \
 tree \
 vim \
 shorewall \
@@ -43,3 +42,5 @@ samba-common \
 nfs-common \
 expect \
 realpath \
+libyaml-dev \
+bison \

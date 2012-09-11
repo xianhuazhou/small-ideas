@@ -1,0 +1,6 @@
+http://wiki.kartbuilding.net/index.php/DNS_-_Bind9
+http://wiki.zimbra.com/wiki/Administration_Console_and_CLI_Certificate_Tools#Single-Node_Self-Signed_Certificate
+http://opengeek.cn/home.php?mod=space&uid=338&do=blog&id=56
+http://sujeetraj.wordpress.com/2012/04/26/zimbra-unable-to-determined-services-from-ldap/
+http://wiki.zimbra.com/wiki/Ports
+http://www.zimbra.com/forums/installation/40454-set-up-zimbra-second-mail-server-without-effecting-first.html

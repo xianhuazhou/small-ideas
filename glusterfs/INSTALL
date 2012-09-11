@@ -54,6 +54,9 @@ Bricks:
 Brick1: ubuntu:/mnt/share
 Brick2: debian:/mnt/share
 
+# gluster volume set gdata allow-insecure on
+Set volume successful
+
 # gluster volume start my-data
 Starting volume my-data has been successful
 
@@ -64,3 +67,12 @@ Starting volume my-data has been successful
 debian:/my-data
     fuse.glusterfs     27G  7.9G   18G  32% /mnt/tmp
 ...
+
+
+if mount failed, may need to do:
+# echo user_allow_other >> /etc/fuse.conf 
+
+Notice:
+==========================
+- All of nodes and clients should be able to resolve the host names (node1.host, node2.host ...).
+- Firewall should work fine.
