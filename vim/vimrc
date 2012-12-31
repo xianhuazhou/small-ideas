@@ -26,6 +26,7 @@ set autoindent
 au BufNewFile,BufRead *.twig set filetype=jinja
 au BufRead,BufNewFile *.js set syntax=jquery
 au BufRead,BufNewFile *.tpl set syntax=php
+au BufRead,BufNewFile *.pp set filetype=puppet
 
 map <f2> :w<CR>:!php -f %<CR>
 map <f3> :w<CR>:!ruby %<CR>

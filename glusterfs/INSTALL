@@ -76,3 +76,7 @@ Notice:
 ==========================
 - All of nodes and clients should be able to resolve the host names (node1.host, node2.host ...).
 - Firewall should work fine.
+
+Reuse bricks:
+# setfattr -x trusted.glusterfs.volume-id /brick-name 
+# setfattr -x trusted.gfid /brick-name
